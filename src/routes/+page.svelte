@@ -1,16 +1,16 @@
 <script lang="ts">
   import LightDark from '$lib/components/LightDark.svelte';
   import { Button } from '$lib/components/ui/button/index.js';
-  import { Checkbox } from '$lib/components/ui/checkbox';
 </script>
 
-<div>
+<div class="flex justify-end bg-red-700 px-5 py-3">
   <LightDark />
 </div>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<div class="flex justify-center bg-red-100 py-2">
+  <h1 class="text-2xl">Find the name</h1>
+</div>
 
-<Button>Button</Button>
-
-<Checkbox />
+<div class="flex items-center justify-between bg-red-300 px-10 py-3">
+  <Button>Cerca</Button>
+</div>
