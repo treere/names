@@ -18,9 +18,7 @@ export const actions: Actions = {
         form
       });
     }
-    console.info("form", form);
-    return {
-      form
-    };
+
+    return { form };
   }
 };
