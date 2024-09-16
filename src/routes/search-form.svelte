@@ -15,13 +15,13 @@
 </script>
 
 <form method="POST" use:enhance>
-  <Form.Field {form} name="username">
+  <Form.Field {form} name="text">
     <Form.Control let:attrs>
       <Form.Label>Username</Form.Label>
-      <Input {...attrs} bind:value={$formData.username} />
+      <Input {...attrs} bind:value={$formData.text} />
     </Form.Control>
-    <Form.Description>This is your public display name.</Form.Description>
+    <Form.Description>Cerca nel nome.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
-  <Form.Button>Submit</Form.Button>
+  <Form.Button>Cerca</Form.Button>
 </form>
