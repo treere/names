@@ -5,5 +5,6 @@ import { formSchema, type FormSchema } from './schema';
 
 export const load: PageServerLoad = async ({ url }) => {
   const form: SuperValidated<Infer<FormSchema>> = await superValidate(url, zod(formSchema));
+
   return { form };
 };

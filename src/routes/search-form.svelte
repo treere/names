@@ -13,18 +13,21 @@
   const form = superForm(data, {
     validators: zodClient(formSchema),
     async onSubmit({ formData, cancel, action }) {
-      formData.forEach((val, key) => {
-        const value = val.toString();
-        if (value !== '') action.searchParams.set(key, value);
-        else action.searchParams.delete(key);
-      });
+      const result = await form.validateForm();
+      if (result.valid) {
+        formData.forEach((val, key) => {
+          const value = val.toString();
+          if (value !== '') action.searchParams.set(key, value);
+          else action.searchParams.delete(key);
+        });
 
-      goto(action, { keepFocus: true });
+        goto(action, { keepFocus: true });
+      }
       cancel();
     }
   });
 
-  const { form: formData, enhance, allErrors } = form;
+  const { form: formData, enhance } = form;
 </script>
 
 <form method="POST" use:enhance>
@@ -36,5 +39,5 @@
     <Form.Description>Cerca nel nome.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
-  <Form.Button disabled={$allErrors.length !== 0}>Cerca</Form.Button>
+  <Form.Button>Cerca</Form.Button>
 </form>
