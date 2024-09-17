@@ -1,10 +1,10 @@
 <script lang="ts">
   import LightDark from '$lib/components/LightDark.svelte';
-  import { Button } from '$lib/components/ui/button/index.js';
-  import type { PageData } from './$types.js';
+  import { type Infer, type SuperValidated } from 'sveltekit-superforms';
+  import type { FormSchema } from './schema';
   import SearchForm from './search-form.svelte';
 
-  export let data: PageData;
+  let { data }: { data: { form: SuperValidated<Infer<FormSchema>> } } = $props();
 </script>
 
 <div class="flex justify-end bg-red-700 px-5 py-3">
