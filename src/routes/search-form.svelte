@@ -1,6 +1,5 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
   import * as Form from '$lib/components/ui/form';
   import { Input } from '$lib/components/ui/input';
   import { formSchema } from './schema';
@@ -13,21 +12,19 @@
 
   const form = superForm(data, {
     validators: zodClient(formSchema),
-    onSubmit({ formData, cancel }) {
-      const url = new URL($page.url);
+    async onSubmit({ formData, cancel, action }) {
       formData.forEach((val, key) => {
         const value = val.toString();
-
-        if (value !== '') url.searchParams.set(key, value);
-        else url.searchParams.delete(key);
+        if (value !== '') action.searchParams.set(key, value);
+        else action.searchParams.delete(key);
       });
 
-      goto(url, { keepFocus: true });
+      goto(action, { keepFocus: true });
       cancel();
     }
   });
 
-  const { form: formData, enhance } = form;
+  const { form: formData, enhance, allErrors } = form;
 </script>
 
 <form method="POST" use:enhance>
@@ -39,5 +36,5 @@
     <Form.Description>Cerca nel nome.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
-  <Form.Button>Cerca</Form.Button>
+  <Form.Button disabled={$allErrors.length !== 0}>Cerca</Form.Button>
 </form>
