@@ -4,7 +4,7 @@
   import type { FormSchema } from './schema';
   import SearchForm from './search-form.svelte';
 
-  let { data }: { data: { form: SuperValidated<Infer<FormSchema>> } } = $props();
+  let { data }: { data: { form: SuperValidated<Infer<FormSchema>>; names: string[] } } = $props();
 </script>
 
 <div class="flex justify-end bg-red-700 px-5 py-3">
@@ -17,4 +17,12 @@
 
 <div class="flex items-center justify-between bg-red-300 px-10 py-3">
   <SearchForm data={data.form} />
+</div>
+
+<div class="flex items-center justify-between bg-red-500 px-10 py-3">
+  <ul>
+    {#each data.names as name}
+      <li>{name}</li>
+    {/each}
+  </ul>
 </div>
