@@ -14,6 +14,7 @@
     validators: zodClient(formSchema),
     async onSubmit({ formData, cancel, action }) {
       const result = await form.validateForm();
+      console.info('RESULT', result);
       if (result.valid) {
         formData.forEach((val, key) => {
           const value = val.toString();
@@ -33,10 +34,26 @@
 <form method="POST" use:enhance>
   <Form.Field {form} name="text">
     <Form.Control let:attrs>
-      <Form.Label>Username</Form.Label>
+      <Form.Label>Contiene</Form.Label>
       <Input {...attrs} bind:value={$formData.text} />
     </Form.Control>
     <Form.Description>Cerca nel nome.</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+  <Form.Field {form} name="start">
+    <Form.Control let:attrs>
+      <Form.Label>Start</Form.Label>
+      <Input {...attrs} bind:value={$formData.start} />
+    </Form.Control>
+    <Form.Description>Inizia con.</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+  <Form.Field {form} name="end">
+    <Form.Control let:attrs>
+      <Form.Label>End</Form.Label>
+      <Input {...attrs} bind:value={$formData.end} />
+    </Form.Control>
+    <Form.Description>Finisce con.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
   <Form.Button>Cerca</Form.Button>
