@@ -3,8 +3,9 @@
   import { type Infer, type SuperValidated } from 'sveltekit-superforms';
   import type { FormSchema } from './schema';
   import SearchForm from './search-form.svelte';
+  import type { Name } from '$lib/names';
 
-  let { data }: { data: { form: SuperValidated<Infer<FormSchema>>; names: string[] } } = $props();
+  let { data }: { data: { form: SuperValidated<Infer<FormSchema>>; namesList: Name[] } } = $props();
 </script>
 
 <div class="flex justify-end bg-red-700 px-5 py-3">
@@ -21,8 +22,8 @@
 
 <div class="flex items-center justify-between bg-red-500 px-10 py-3">
   <ul>
-    {#each data.names as name}
-      <li>{name}</li>
+    {#each data.namesList as name}
+      <li>{name.name}</li>
     {/each}
   </ul>
 </div>
