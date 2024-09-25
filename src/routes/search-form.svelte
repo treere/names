@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import * as Form from '$lib/components/ui/form';
+  import * as Select from '$lib/components/ui/select';
   import { Input } from '$lib/components/ui/input';
   import { formSchema } from './schema';
   import { superForm } from 'sveltekit-superforms';
@@ -9,18 +10,25 @@
   import type { FormSchema } from './schema';
 
   let { data }: { data: SuperValidated<Infer<FormSchema>> } = $props();
+  console.info(data);
 
   const form = superForm(data, {
     validators: zodClient(formSchema),
     async onSubmit({ formData, cancel, action }) {
-      const result = await form.validateForm();
-      console.info('RESULT', result);
-      if (result.valid) {
-        formData.forEach((val, key) => {
-          const value = val.toString();
-          if (value !== '') action.searchParams.set(key, value);
-          else action.searchParams.delete(key);
-        });
+      const { valid, data } = await form.validateForm();
+
+      if (valid) {
+        if (data.text !== '') action.searchParams.set('text', data.text);
+        else action.searchParams.delete('text');
+
+        if (data.start !== '') action.searchParams.set('start', data.start);
+        else action.searchParams.delete('start');
+
+        if (data.end !== '') action.searchParams.set('end', data.end);
+        else action.searchParams.delete('end');
+
+        if (data.sex !== undefined) action.searchParams.set('sex', data.sex);
+        else action.searchParams.delete('sex');
 
         goto(action, { keepFocus: true });
       }
@@ -29,6 +37,15 @@
   });
 
   const { form: formData, enhance } = form;
+
+  const selectedSex = $derived(
+    $formData.sex
+      ? {
+          label: $formData.sex,
+          value: $formData.sex
+        }
+      : undefined
+  );
 </script>
 
 <form method="POST" use:enhance>
@@ -55,6 +72,25 @@
     </Form.Control>
     <Form.Description>Finisce con.</Form.Description>
     <Form.FieldErrors />
+  </Form.Field>
+  <Form.Field {form} name="sex">
+    <Form.Control let:attrs>
+      <Form.Label>Sex</Form.Label>
+      <Select.Root
+        selected={selectedSex}
+        onSelectedChange={(v) => {
+          v && ($formData.sex = v.value);
+        }}
+      >
+        <Select.Trigger class="w-[180px]" {...attrs}>
+          <Select.Value placeholder="" />
+        </Select.Trigger>
+        <Select.Content>
+          <Select.Item value={'M'}>Maschio</Select.Item>
+          <Select.Item value={'F'}>Femmina</Select.Item>
+        </Select.Content>
+      </Select.Root>
+    </Form.Control>
   </Form.Field>
   <Form.Button>Cerca</Form.Button>
 </form>
