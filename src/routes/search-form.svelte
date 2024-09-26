@@ -10,35 +10,19 @@
   import type { FormSchema } from './schema';
 
   let { data }: { data: SuperValidated<Infer<FormSchema>> } = $props();
-  console.info(data);
 
   const form = superForm(data, {
     validators: zodClient(formSchema),
     async onSubmit({ formData, cancel, action }) {
       const { valid, data } = await form.validateForm();
 
+      console.info(data, typeof data, Object.keys(data), data['contain']);
+
       if (valid) {
-        if (data.contain !== '') action.searchParams.set('contain', data.contain);
-        else action.searchParams.delete('contain');
-
-        if (data.notContain !== '') action.searchParams.set('notContain', data.notContain);
-        else action.searchParams.delete('notContain');
-
-        if (data.start !== '') action.searchParams.set('start', data.start);
-        else action.searchParams.delete('start');
-
-        if (data.notStart !== '') action.searchParams.set('notStart', data.notStart);
-        else action.searchParams.delete('notStart');
-
-        if (data.end !== '') action.searchParams.set('end', data.end);
-        else action.searchParams.delete('end');
-
-        if (data.notEnd !== '') action.searchParams.set('notEnd', data.notEnd);
-        else action.searchParams.delete('notEnd');
-
-        if (data.sex !== undefined) action.searchParams.set('sex', data.sex);
-        else action.searchParams.delete('sex');
-
+        Object.entries(data).forEach(([key, v]) => {
+          if (v !== '' && v !== undefined) action.searchParams.set(key, v);
+          else action.searchParams.delete(key);
+        });
         goto(action, { keepFocus: true });
       }
       cancel();

@@ -27,32 +27,22 @@ export const filteredNamesList = (filters: Filters): Name[] => {
   if (filters.sex) n = n.filter((name) => name.sex === filters.sex);
 
   if (filters.contain.length !== 0)
-    n = n.filter((name) =>
-      filters.contain.split(',').some((v) => name.key.includes(v))
-    );
+    n = n.filter((name) => filters.contain.split(',').some((v) => name.key.includes(v)));
 
   if (filters.notContain.length !== 0)
-    n = n.filter(
-      (name) => !filters.notContain.split(',').some((v) => name.key.includes(v))
-    );
+    n = n.filter((name) => !filters.notContain.split(',').some((v) => name.key.includes(v)));
 
   if (filters.start.length !== 0)
-    n = n.filter((name) =>
-      filters.start.split(',').some((v) => name.key.startsWith(v))
-    );
+    n = n.filter((name) => filters.start.split(',').some((v) => name.key.startsWith(v)));
 
   if (filters.notStart.length !== 0)
-    n = n.filter(
-      (name) => !filters.notStart.split(',').some((v) => name.key.startsWith(v))
-    );
+    n = n.filter((name) => !filters.notStart.split(',').some((v) => name.key.startsWith(v)));
 
   if (filters.end.length !== 0)
     n = n.filter((name) => filters.end.split(',').some((v) => name.key.endsWith(v)));
 
   if (filters.notEnd.length !== 0)
-    n = n.filter(
-      (name) => !filters.notEnd.split(',').some((v) => name.key.endsWith(v))
-    );
+    n = n.filter((name) => !filters.notEnd.split(',').some((v) => name.key.endsWith(v)));
 
   return n;
 };
