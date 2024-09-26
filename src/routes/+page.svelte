@@ -16,14 +16,11 @@
   <h1 class="text-2xl">Find the name</h1>
 </div>
 
-<div class="flex items-center justify-between bg-red-300 px-10 py-3">
-  <SearchForm data={data.form} />
-</div>
+<SearchForm data={data.form} />
 
-<div class="flex items-center justify-between bg-red-500 px-10 py-3">
-  <ul>
+
+<div class="flex-wrap flex gap-1 bg-red-500 px-10 py-3">
     {#each data.namesList as name}
-      <li>{name.name}</li>
+      <div>{name.name}</div>
     {/each}
-  </ul>
 </div>

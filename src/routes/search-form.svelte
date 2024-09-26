@@ -41,7 +41,7 @@
   );
 </script>
 
-<form method="POST" use:enhance>
+<form method="POST" use:enhance class="flex items-center justify-between bg-red-300 px-10 py-3">
   <Form.Field {form} name="contain">
     <Form.Control let:attrs>
       <Form.Label>Contiene</Form.Label>
@@ -114,6 +114,8 @@
         </Select.Content>
       </Select.Root>
     </Form.Control>
+    <Form.Description>Sesso.</Form.Description>
+    <Form.FieldErrors />
   </Form.Field>
   <Form.Button>Cerca</Form.Button>
 </form>
