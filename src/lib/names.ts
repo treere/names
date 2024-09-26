@@ -1,3 +1,6 @@
+import FEMALE_NAMES from './femaleNames';
+import MALE_NAMES from './maleNames';
+
 export interface Filters {
   text: string;
   start: string;
@@ -12,13 +15,7 @@ export interface Name {
 
 export type Sex = 'M' | 'F';
 
-const names: Name[] = [
-  { sex: 'M', name: 'andrea' },
-  { sex: 'F', name: 'anna' },
-  { sex: 'M', name: 'luca' },
-  { sex: 'F', name: 'lucia' },
-  { sex: 'F', name: 'bianca' }
-];
+const names: Name[] = MALE_NAMES.concat(FEMALE_NAMES);
 
 export const filteredNamesList = (filters: Filters): Name[] => {
   let n = names;
