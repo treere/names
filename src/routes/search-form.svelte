@@ -21,11 +21,20 @@
         if (data.contain !== '') action.searchParams.set('contain', data.contain);
         else action.searchParams.delete('contain');
 
+        if (data.notContain !== '') action.searchParams.set('notContain', data.notContain);
+        else action.searchParams.delete('notContain');
+
         if (data.start !== '') action.searchParams.set('start', data.start);
         else action.searchParams.delete('start');
 
+        if (data.notStart !== '') action.searchParams.set('notStart', data.notStart);
+        else action.searchParams.delete('notStart');
+
         if (data.end !== '') action.searchParams.set('end', data.end);
         else action.searchParams.delete('end');
+
+        if (data.notEnd !== '') action.searchParams.set('notEnd', data.notEnd);
+        else action.searchParams.delete('notEnd');
 
         if (data.sex !== undefined) action.searchParams.set('sex', data.sex);
         else action.searchParams.delete('sex');
@@ -54,9 +63,19 @@
       <Form.Label>Contiene</Form.Label>
       <Input {...attrs} bind:value={$formData.contain} />
     </Form.Control>
-    <Form.Description>Cerca nel nome.</Form.Description>
+    <Form.Description>Il nome non contiene.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
+
+  <Form.Field {form} name="notContain">
+    <Form.Control let:attrs>
+      <Form.Label>Non Contiene</Form.Label>
+      <Input {...attrs} bind:value={$formData.notContain} />
+    </Form.Control>
+    <Form.Description>Il nome non contiene.</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+
   <Form.Field {form} name="start">
     <Form.Control let:attrs>
       <Form.Label>Start</Form.Label>
@@ -65,6 +84,16 @@
     <Form.Description>Inizia con.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
+
+  <Form.Field {form} name="notStart">
+    <Form.Control let:attrs>
+      <Form.Label>NotStart</Form.Label>
+      <Input {...attrs} bind:value={$formData.notStart} />
+    </Form.Control>
+    <Form.Description>Non nizia con.</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+
   <Form.Field {form} name="end">
     <Form.Control let:attrs>
       <Form.Label>End</Form.Label>
@@ -73,6 +102,16 @@
     <Form.Description>Finisce con.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
+
+  <Form.Field {form} name="notEnd">
+    <Form.Control let:attrs>
+      <Form.Label>NotEnd</Form.Label>
+      <Input {...attrs} bind:value={$formData.notEnd} />
+    </Form.Control>
+    <Form.Description>Non finisce con.</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+
   <Form.Field {form} name="sex">
     <Form.Control let:attrs>
       <Form.Label>Sex</Form.Label>
