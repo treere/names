@@ -1086,6 +1086,6 @@ const MALE_NAMES: Name[] = [
   'Zetico',
   'Zoilo',
   'Zosimo'
-].map((name) => ({ sex: 'M', name }));
+].map((name) => ({ sex: 'M', name, key: name.toLowerCase() }));
 
 export default MALE_NAMES;
