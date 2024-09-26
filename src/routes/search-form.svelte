@@ -18,8 +18,8 @@
       const { valid, data } = await form.validateForm();
 
       if (valid) {
-        if (data.text !== '') action.searchParams.set('text', data.text);
-        else action.searchParams.delete('text');
+        if (data.contain !== '') action.searchParams.set('contain', data.contain);
+        else action.searchParams.delete('contain');
 
         if (data.start !== '') action.searchParams.set('start', data.start);
         else action.searchParams.delete('start');
@@ -49,10 +49,10 @@
 </script>
 
 <form method="POST" use:enhance>
-  <Form.Field {form} name="text">
+  <Form.Field {form} name="contain">
     <Form.Control let:attrs>
       <Form.Label>Contiene</Form.Label>
-      <Input {...attrs} bind:value={$formData.text} />
+      <Input {...attrs} bind:value={$formData.contain} />
     </Form.Control>
     <Form.Description>Cerca nel nome.</Form.Description>
     <Form.FieldErrors />

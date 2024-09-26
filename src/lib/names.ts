@@ -2,7 +2,7 @@ import FEMALE_NAMES from './femaleNames';
 import MALE_NAMES from './maleNames';
 
 export interface Filters {
-  text: string;
+  contain: string;
   start: string;
   end: string;
   sex?: Sex;
@@ -22,8 +22,8 @@ export const filteredNamesList = (filters: Filters): Name[] => {
 
   if (filters.sex) n = n.filter((name) => name.sex === filters.sex);
 
-  if (filters.text.length !== 0)
-    n = n.filter((name) => filters.text.split(',').some((v) => name.name.includes(v)));
+  if (filters.contain.length !== 0)
+    n = n.filter((name) => filters.contain.split(',').some((v) => name.name.includes(v)));
 
   if (filters.start.length !== 0)
     n = n.filter((name) => filters.start.split(',').some((v) => name.name.startsWith(v)));
