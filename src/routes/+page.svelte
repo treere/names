@@ -8,17 +8,17 @@
   let { data }: { data: { form: SuperValidated<Infer<FormSchema>>; namesList: Name[] } } = $props();
 </script>
 
-<div class="flex justify-end bg-red-700 px-5 py-3">
+<div class="flex justify-end px-5 py-3">
   <LightDark />
 </div>
 
-<div class="flex justify-center bg-red-100 py-2">
+<div class="flex justify-center py-2">
   <h1 class="text-2xl">Find the name</h1>
 </div>
 
 <SearchForm data={data.form} />
 
-<div class="grid grid-cols-5 gap-1 bg-red-500 px-10 py-3">
+<div class="grid grid-cols-5 gap-1 px-10 py-3">
   {#each data.namesList as name}
     <div>{name.name}</div>
   {/each}

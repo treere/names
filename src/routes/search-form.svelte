@@ -16,8 +16,6 @@
     async onSubmit({ formData, cancel, action }) {
       const { valid, data } = await form.validateForm();
 
-      console.info(data, typeof data, Object.keys(data), data['contain']);
-
       if (valid) {
         Object.entries(data).forEach(([key, v]) => {
           if (v !== '' && v !== undefined) action.searchParams.set(key, v.toString());
@@ -41,7 +39,7 @@
   );
 </script>
 
-<form method="POST" use:enhance class="flex items-center justify-between bg-red-300 px-10 py-3">
+<form method="POST" use:enhance class="flex items-center justify-between gap-10 px-10 py-3">
   <Form.Field {form} name="contain">
     <Form.Control let:attrs>
       <Form.Label>Contiene</Form.Label>
