@@ -39,7 +39,7 @@
   );
 </script>
 
-<form method="POST" use:enhance class="flex items-center justify-between gap-10 px-10 py-3">
+<form method="POST" use:enhance class="flex flex-wrap items-center justify-between gap-10 px-10 py-3">
   <Form.Field {form} name="contain">
     <Form.Control let:attrs>
       <Form.Label>Contiene</Form.Label>
