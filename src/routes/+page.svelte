@@ -18,7 +18,7 @@
 
 <SearchForm data={data.form} />
 
-<div class="flex flex-wrap gap-1 bg-red-500 px-10 py-3">
+<div class="grid grid-cols-5 gap-1 bg-red-500 px-10 py-3">
   {#each data.namesList as name}
     <div>{name.name}</div>
   {/each}
