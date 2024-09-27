@@ -9,6 +9,8 @@ export interface Filters {
   notEnd: string;
   sex?: Sex;
   start: string;
+  minLength: number;
+  maxLength: number;
 }
 
 export interface Name {
@@ -25,6 +27,10 @@ export const filteredNamesList = (filters: Filters): Name[] => {
   let n = names;
 
   if (filters.sex) n = n.filter((name) => name.sex === filters.sex);
+
+  if (filters.minLength > 0) n = n.filter((name) => name.name.length >= filters.minLength);
+
+  if (filters.maxLength > 0) n = n.filter((name) => name.name.length <= filters.maxLength);
 
   if (filters.contain.length !== 0)
     n = n.filter((name) => filters.contain.split(',').some((v) => name.key.includes(v)));

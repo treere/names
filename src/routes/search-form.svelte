@@ -20,7 +20,7 @@
 
       if (valid) {
         Object.entries(data).forEach(([key, v]) => {
-          if (v !== '' && v !== undefined) action.searchParams.set(key, v);
+          if (v !== '' && v !== undefined) action.searchParams.set(key, v.toString());
           else action.searchParams.delete(key);
         });
         goto(action, { keepFocus: true });
@@ -96,6 +96,24 @@
     <Form.FieldErrors />
   </Form.Field>
 
+  <Form.Field {form} name="minLength">
+    <Form.Control let:attrs>
+      <Form.Label>Min</Form.Label>
+      <Input type="number" {...attrs} bind:value={$formData.minLength} />
+    </Form.Control>
+    <Form.Description>Minimo caratteri.</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+
+  <Form.Field {form} name="maxLength">
+    <Form.Control let:attrs>
+      <Form.Label>Max</Form.Label>
+      <Input type="number" {...attrs} bind:value={$formData.maxLength} />
+    </Form.Control>
+    <Form.Description>Massimo caratteri.</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+
   <Form.Field {form} name="sex">
     <Form.Control let:attrs>
       <Form.Label>Sex</Form.Label>
@@ -117,5 +135,6 @@
     <Form.Description>Sesso.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
+
   <Form.Button>Cerca</Form.Button>
 </form>
