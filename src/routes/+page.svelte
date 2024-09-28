@@ -1,11 +1,17 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import LightDark from '$lib/components/LightDark.svelte';
-  import { type Infer, type SuperValidated } from 'sveltekit-superforms';
-  import type { FormSchema } from './schema';
+  import { filteredNamesList } from '$lib/names';
+  import { superValidate } from 'sveltekit-superforms';
+  import { zod } from 'sveltekit-superforms/adapters';
+  import { formSchema } from './schema';
   import SearchForm from './search-form.svelte';
-  import type { Name } from '$lib/names';
 
-  let { data }: { data: { form: SuperValidated<Infer<FormSchema>>; namesList: Name[] } } = $props();
+  const form = $derived.by(async () => {
+    return await superValidate($page.url, zod(formSchema));
+  });
+
+  const namesList = $derived(form.then((f) => filteredNamesList(f.data)));
 </script>
 
 <div class="flex justify-end px-5 py-3">
@@ -16,10 +22,22 @@
   <h1 class="text-2xl">Find the name</h1>
 </div>
 
-<SearchForm data={data.form} />
+{#await form}
+  <p>...waiting</p>
+{:then form}
+  <SearchForm data={form} />
+{:catch error}
+  <p style="color: red">{error.message}</p>
+{/await}
 
-<div class="grid grid-cols-5 gap-1 px-10 py-3">
-  {#each data.namesList as name}
-    <div>{name.name}</div>
-  {/each}
-</div>
+{#await namesList}
+  <p>...waiting</p>
+{:then namesList}
+  <div class="grid grid-cols-5 gap-1 px-10 py-3">
+    {#each namesList as name}
+      <div>{name.name}</div>
+    {/each}
+  </div>
+{:catch error}
+  <p style="color: red">{error.message}</p>
+{/await}
