@@ -4,6 +4,6 @@
 </script>
 
 <ModeWatcher />
-<div class="max-w-screen-lg mx-auto">
+<div class="mx-auto max-w-screen-lg">
   <slot />
 </div>

@@ -8,26 +8,22 @@
   import { zodClient } from 'sveltekit-superforms/adapters';
   import { type Infer, type SuperValidated } from 'sveltekit-superforms';
   import type { FormSchema } from './schema';
+  import qs from 'qs';
 
   let { data }: { data: SuperValidated<Infer<FormSchema>> } = $props();
 
   const form = superForm(data, {
+    SPA: true,
     validators: zodClient(formSchema),
-    async onSubmit({ formData, cancel, action }) {
-      const { valid, data } = await form.validateForm();
-
-      if (valid) {
-        Object.entries(data).forEach(([key, v]) => {
-          if (v !== '' && v !== undefined) action.searchParams.set(key, v.toString());
-          else action.searchParams.delete(key);
-        });
-        goto(action, { keepFocus: true });
-      }
+    async onUpdate({ form, cancel }) {
+      const params = qs.stringify(form.data);
+      goto(`/?${params}`, { keepFocus: true });
       cancel();
     }
   });
 
-  const { form: formData, enhance } = form;
+  const { form: formData, enhance, validateForm } = form;
+  validateForm({ update: true });
 
   const selectedSex = $derived(
     $formData.sex
@@ -39,7 +35,11 @@
   );
 </script>
 
-<form method="POST" use:enhance class="flex flex-wrap items-center justify-between gap-10 px-10 py-3">
+<form
+  method="POST"
+  use:enhance
+  class="flex flex-wrap items-center justify-between gap-10 px-10 py-3"
+>
   <Form.Field {form} name="contain">
     <Form.Control let:attrs>
       <Form.Label>Contiene</Form.Label>
