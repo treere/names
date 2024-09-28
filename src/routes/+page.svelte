@@ -19,11 +19,11 @@
 </div>
 
 <div class="flex justify-center py-2">
-  <h1 class="text-2xl">Find the name</h1>
+  <h1 class="text-2xl">Trova il nome</h1>
 </div>
 
 {#await form}
-  <p>...waiting</p>
+  <p>...Caricamento filtri</p>
 {:then form}
   <SearchForm data={form} />
 {:catch error}
@@ -31,11 +31,10 @@
 {/await}
 
 {#await namesList}
-  <p>...waiting</p>
+  <p>...Caricamento nomi</p>
 {:then namesList}
   <p>Totale nomi filtrati: {namesList.length}</p>
   <div class="grid grid-cols-5 gap-1 px-10 py-3">
-
     {#each namesList as name}
       <div>{name.name}</div>
     {/each}
