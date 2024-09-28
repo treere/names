@@ -9,6 +9,7 @@
   import { type Infer, type SuperValidated } from 'sveltekit-superforms';
   import type { FormSchema } from './schema';
   import qs from 'qs';
+  import { Button } from '$lib/components/ui/button';
 
   let { data }: { data: SuperValidated<Infer<FormSchema>> } = $props();
 
@@ -35,86 +36,74 @@
   );
 </script>
 
-<form
-  method="POST"
-  use:enhance
-  class="flex flex-wrap items-center justify-between gap-10 px-10 py-3"
->
+<form method="POST" use:enhance class="flex flex-wrap items-center justify-between gap-1">
   <Form.Field {form} name="contain">
     <Form.Control let:attrs>
       <Form.Label>Contiene</Form.Label>
       <Input {...attrs} bind:value={$formData.contain} />
     </Form.Control>
-    <Form.Description>Il nome non contiene.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
 
   <Form.Field {form} name="notContain">
     <Form.Control let:attrs>
-      <Form.Label>Non Contiene</Form.Label>
+      <Form.Label>Non contiene</Form.Label>
       <Input {...attrs} bind:value={$formData.notContain} />
     </Form.Control>
-    <Form.Description>Il nome non contiene.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
 
   <Form.Field {form} name="start">
     <Form.Control let:attrs>
-      <Form.Label>Start</Form.Label>
+      <Form.Label>Inizia con</Form.Label>
       <Input {...attrs} bind:value={$formData.start} />
     </Form.Control>
-    <Form.Description>Inizia con.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
 
   <Form.Field {form} name="notStart">
     <Form.Control let:attrs>
-      <Form.Label>NotStart</Form.Label>
+      <Form.Label>Non inizia con</Form.Label>
       <Input {...attrs} bind:value={$formData.notStart} />
     </Form.Control>
-    <Form.Description>Non nizia con.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
 
   <Form.Field {form} name="end">
     <Form.Control let:attrs>
-      <Form.Label>End</Form.Label>
+      <Form.Label>Finisce con</Form.Label>
       <Input {...attrs} bind:value={$formData.end} />
     </Form.Control>
-    <Form.Description>Finisce con.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
 
   <Form.Field {form} name="notEnd">
     <Form.Control let:attrs>
-      <Form.Label>NotEnd</Form.Label>
+      <Form.Label>Non finisce con</Form.Label>
       <Input {...attrs} bind:value={$formData.notEnd} />
     </Form.Control>
-    <Form.Description>Non finisce con.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
 
   <Form.Field {form} name="minLength">
     <Form.Control let:attrs>
-      <Form.Label>Min</Form.Label>
+      <Form.Label>Lunghezza minima</Form.Label>
       <Input type="number" {...attrs} bind:value={$formData.minLength} />
     </Form.Control>
-    <Form.Description>Minimo caratteri.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
 
   <Form.Field {form} name="maxLength">
     <Form.Control let:attrs>
-      <Form.Label>Max</Form.Label>
+      <Form.Label>Lunghezza massima</Form.Label>
       <Input type="number" {...attrs} bind:value={$formData.maxLength} />
     </Form.Control>
-    <Form.Description>Massimo caratteri.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
 
   <Form.Field {form} name="sex">
     <Form.Control let:attrs>
-      <Form.Label>Sex</Form.Label>
+      <Form.Label>Sesso</Form.Label>
       <Select.Root
         selected={selectedSex}
         onSelectedChange={(v) => {
@@ -130,9 +119,9 @@
         </Select.Content>
       </Select.Root>
     </Form.Control>
-    <Form.Description>Sesso.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
 
   <Form.Button>Cerca</Form.Button>
+  <Button onclick={() => goto('/', { keepFocus: true })}>Reset</Button>
 </form>

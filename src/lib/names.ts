@@ -53,4 +53,4 @@ export const filteredNamesList = (filters: Filters): Name[] => {
   return n;
 };
 
-const parseString = (s: string) : string[] =>  s.split(",").map((v) => v.trim().toLowerCase())
+const parseString = (s: string): string[] => s.split(',').map((v) => v.trim().toLowerCase());
