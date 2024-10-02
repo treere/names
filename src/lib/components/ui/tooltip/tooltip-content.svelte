@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Tooltip as TooltipPrimitive } from 'bits-ui';
   import { cn, flyAndScale } from '$lib/utils.js';
-    import type { Snippet } from 'svelte';
+  import type { Snippet } from 'svelte';
 
   let {
     class: className,
@@ -13,7 +13,7 @@
     },
     children,
     ...rest
-  }: TooltipPrimitive.ContentProps & {children: Snippet}= $props();
+  }: TooltipPrimitive.ContentProps & { children: Snippet } = $props();
 </script>
 
 <TooltipPrimitive.Content

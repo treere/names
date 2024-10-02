@@ -4,11 +4,7 @@
   import Minus from 'lucide-svelte/icons/minus';
   import { cn } from '$lib/utils.js';
 
-  type $$Props = CheckboxPrimitive.Props;
-
-  let className: $$Props['class'] = undefined;
-  export let checked: $$Props['checked'] = false;
-  export { className as class };
+  let { class: className, checked = false, ...rest }: CheckboxPrimitive.Props = $props();
 </script>
 
 <CheckboxPrimitive.Root
@@ -17,7 +13,7 @@
     className
   )}
   bind:checked
-  {...$$restProps}
+  {...rest}
   on:click
 >
   <CheckboxPrimitive.Indicator
