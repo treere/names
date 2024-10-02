@@ -1,11 +1,13 @@
 <script lang="ts">
   import { Label as LabelPrimitive } from 'bits-ui';
   import { cn } from '$lib/utils.js';
+  import type { Snippet } from 'svelte';
 
-  type $$Props = LabelPrimitive.Props;
-
-  let className: $$Props['class'] = undefined;
-  export { className as class };
+  let {
+    class: className,
+    children,
+    ...rest
+  }: { children: Snippet } & LabelPrimitive.Props = $props();
 </script>
 
 <LabelPrimitive.Root
@@ -13,8 +15,7 @@
     'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
     className
   )}
-  {...$$restProps}
-  on:mousedown
+  {...rest}
 >
-  <slot />
+  {@render children()}
 </LabelPrimitive.Root>
