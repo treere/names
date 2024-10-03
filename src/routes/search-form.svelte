@@ -1,8 +1,5 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import * as Form from '$lib/components/ui/form';
-  import * as Select from '$lib/components/ui/select';
-  import { Input } from '$lib/components/ui/input';
   import { formSchema } from './schema';
   import { superForm } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
@@ -23,108 +20,82 @@
     }
   });
 
-  const { form: formData, enhance, validateForm } = form;
+  const { form: formData, enhance, validateForm, errors } = form;
   validateForm({ update: true });
-
-  const selectedSex = $derived(
-    $formData.sex
-      ? {
-          label: $formData.sex,
-          value: $formData.sex
-        }
-      : undefined
-  );
 </script>
 
 <form method="POST" use:enhance>
   <div class="flex flex-wrap place-items-center gap-1">
-    <Form.Field {form} name="contain">
-      <Form.Control let:attrs>
-        <Form.Label>Contiene</Form.Label>
-        <Input {...attrs} bind:value={$formData.contain} />
-      </Form.Control>
-      <Form.FieldErrors />
-    </Form.Field>
+    <label for="contain">Contiene</label>
+    <input
+      name="contain"
+      aria-invalid={$errors.contain ? 'true' : undefined}
+      bind:value={$formData.contain}
+    />
+    {#if $errors.contain}<span class="invalid">{$errors.contain}</span>{/if}
 
-    <Form.Field {form} name="notContain">
-      <Form.Control let:attrs>
-        <Form.Label>Non contiene</Form.Label>
-        <Input {...attrs} bind:value={$formData.notContain} />
-      </Form.Control>
-      <Form.FieldErrors />
-    </Form.Field>
+    <label for="notContain">Non contiene</label>
+    <input
+      name="notContain"
+      aria-invalid={$errors.notContain ? 'true' : undefined}
+      bind:value={$formData.notContain}
+    />
+    {#if $errors.notContain}<span class="invalid">{$errors.notContain}</span>{/if}
 
-    <Form.Field {form} name="start">
-      <Form.Control let:attrs>
-        <Form.Label>Inizia con</Form.Label>
-        <Input {...attrs} bind:value={$formData.start} />
-      </Form.Control>
-      <Form.FieldErrors />
-    </Form.Field>
+    <label for="start">Inizia</label>
+    <input
+      name="start"
+      aria-invalid={$errors.start ? 'true' : undefined}
+      bind:value={$formData.start}
+    />
+    {#if $errors.start}<span class="invalid">{$errors.start}</span>{/if}
 
-    <Form.Field {form} name="notStart">
-      <Form.Control let:attrs>
-        <Form.Label>Non inizia con</Form.Label>
-        <Input {...attrs} bind:value={$formData.notStart} />
-      </Form.Control>
-      <Form.FieldErrors />
-    </Form.Field>
+    <label for="notStart">Non inizia</label>
+    <input
+      name="notStart"
+      aria-invalid={$errors.notStart ? 'true' : undefined}
+      bind:value={$formData.notStart}
+    />
+    {#if $errors.notStart}<span class="invalid">{$errors.notStart}</span>{/if}
 
-    <Form.Field {form} name="end">
-      <Form.Control let:attrs>
-        <Form.Label>Finisce con</Form.Label>
-        <Input {...attrs} bind:value={$formData.end} />
-      </Form.Control>
-      <Form.FieldErrors />
-    </Form.Field>
+    <label for="end">Finisce</label>
+    <input name="end" aria-invalid={$errors.end ? 'true' : undefined} bind:value={$formData.end} />
+    {#if $errors.end}<span class="invalid">{$errors.end}</span>{/if}
 
-    <Form.Field {form} name="notEnd">
-      <Form.Control let:attrs>
-        <Form.Label>Non finisce con</Form.Label>
-        <Input {...attrs} bind:value={$formData.notEnd} />
-      </Form.Control>
-      <Form.FieldErrors />
-    </Form.Field>
+    <label for="notEnd">Non finisce</label>
+    <input
+      name="notEnd"
+      aria-invalid={$errors.notEnd ? 'true' : undefined}
+      bind:value={$formData.notEnd}
+    />
+    {#if $errors.notEnd}<span class="invalid">{$errors.notEnd}</span>{/if}
 
-    <Form.Field {form} name="minLength">
-      <Form.Control let:attrs>
-        <Form.Label>Lunghezza minima</Form.Label>
-        <Input type="number" {...attrs} bind:value={$formData.minLength} />
-      </Form.Control>
-      <Form.FieldErrors />
-    </Form.Field>
+    <label for="minLength">Lunghezza minima</label>
+    <input
+      name="minLength"
+      type="number"
+      aria-invalid={$errors.minLength ? 'true' : undefined}
+      bind:value={$formData.minLength}
+    />
+    {#if $errors.minLength}<span class="invalid">{$errors.minLength}</span>{/if}
 
-    <Form.Field {form} name="maxLength">
-      <Form.Control let:attrs>
-        <Form.Label>Lunghezza massima</Form.Label>
-        <Input type="number" {...attrs} bind:value={$formData.maxLength} />
-      </Form.Control>
-      <Form.FieldErrors />
-    </Form.Field>
+    <label for="maxLength">Lunghezza massima</label>
+    <input
+      name="maxLength"
+      type="number"
+      aria-invalid={$errors.maxLength ? 'true' : undefined}
+      bind:value={$formData.maxLength}
+    />
+    {#if $errors.maxLength}<span class="invalid">{$errors.maxLength}</span>{/if}
 
-    <Form.Field {form} name="sex">
-      <Form.Control let:attrs>
-        <Form.Label>Sesso</Form.Label>
-        <Select.Root
-          selected={selectedSex}
-          onSelectedChange={(v) => {
-            v && ($formData.sex = v.value);
-          }}
-        >
-          <Select.Trigger class="w-[180px]" {...attrs}>
-            <Select.Value placeholder="" />
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Item value={'M'}>Maschio</Select.Item>
-            <Select.Item value={'F'}>Femmina</Select.Item>
-          </Select.Content>
-        </Select.Root>
-      </Form.Control>
-      <Form.FieldErrors />
-    </Form.Field>
+    <label for="sex">Sesso</label>
+    <select name="sex" bind:value={$formData.sex}>
+      <option value={'M'}>M</option>
+      <option value={'F'}>F</option>
+    </select>
   </div>
   <div class="flex justify-end gap-1">
-    <Form.Button>Cerca</Form.Button>
+    <Button type="submit">Cerca</Button>
 
     <Button onclick={() => goto('/', { keepFocus: true })}>Reset</Button>
   </div>
