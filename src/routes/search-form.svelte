@@ -4,8 +4,8 @@
   import { superForm } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
   import { type Infer, type SuperValidated } from 'sveltekit-superforms';
-  import Input from '$lib/components/ui/input.svelte';
-    import Label from '$lib/components/ui/label.svelte';
+  import Label from '$lib/components/ui/label.svelte';
+  import FormField from '$lib/components/ui/form-field.svelte';
   import type { FormSchema } from './schema';
   import qs from 'qs';
   import { Button } from '$lib/components/ui/button';
@@ -28,67 +28,14 @@
 
 <form method="POST" use:enhance>
   <div class="flex flex-wrap place-items-center gap-1">
-    <Label for="contain">Contiene</Label>
-    <Input
-      name="contain"
-      aria-invalid={$errors.contain ? 'true' : undefined}
-      bind:value={$formData.contain}
-    />
-    {#if $errors.contain}<span class="invalid">{$errors.contain}</span>{/if}
-
-    <Label for="notContain">Non contiene</Label>
-    <Input
-      name="notContain"
-      aria-invalid={$errors.notContain ? 'true' : undefined}
-      bind:value={$formData.notContain}
-    />
-    {#if $errors.notContain}<span class="invalid">{$errors.notContain}</span>{/if}
-
-    <Label for="start">Inizia</Label>
-    <Input
-      name="start"
-      aria-invalid={$errors.start ? 'true' : undefined}
-      bind:value={$formData.start}
-    />
-    {#if $errors.start}<span class="invalid">{$errors.start}</span>{/if}
-
-    <Label for="notStart">Non inizia</Label>
-    <Input
-      name="notStart"
-      aria-invalid={$errors.notStart ? 'true' : undefined}
-      bind:value={$formData.notStart}
-    />
-    {#if $errors.notStart}<span class="invalid">{$errors.notStart}</span>{/if}
-
-    <Label for="end">Finisce</Label>
-    <Input name="end" aria-invalid={$errors.end ? 'true' : undefined} bind:value={$formData.end} />
-    {#if $errors.end}<span class="invalid">{$errors.end}</span>{/if}
-
-    <Label for="notEnd">Non finisce</Label>
-    <Input
-      name="notEnd"
-      aria-invalid={$errors.notEnd ? 'true' : undefined}
-      bind:value={$formData.notEnd}
-    />
-    {#if $errors.notEnd}<span class="invalid">{$errors.notEnd}</span>{/if}
-
-    <Label for="minLength">Lunghezza minima</Label>
-    <Input
-      name="minLength"
-      type="number"
-      aria-invalid={$errors.minLength ? 'true' : undefined}
-      bind:value={$formData.minLength}
-    />
-    {#if $errors.minLength}<span class="invalid">{$errors.minLength}</span>{/if}
-
-    <Label for="maxLength">Lunghezza massima</Label>
-    <Input
-      name="maxLength"
-      type="number"
-      aria-invalid={$errors.maxLength ? 'true' : undefined}
-      bind:value={$formData.maxLength}
-    />
-    {#if $errors.maxLength}<span class="invalid">{$errors.maxLength}</span>{/if}
+    <FormField name="contain" formData={form} label="Contiene" />
+    <FormField name="notContain" formData={form} label="Non contiene" />
+    <FormField name="start" formData={form} label="Inizia" />
+    <FormField name="notStart" formData={form} label="Non inizia" />
+    <FormField name="end" formData={form} label="Finisce" />
+    <FormField name="notEnd" formData={form} label="Non finisce" />
+    <FormField name="minLength" formData={form} label="Lunghezza minima" type="number" />
+    <FormField name="maxLength" formData={form} label="Lunghezza massima" type="number" />
 
     <Label for="sex">Sesso</Label>
     <select name="sex" bind:value={$formData.sex}>
