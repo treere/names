@@ -4,6 +4,8 @@
   import { superForm } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
   import { type Infer, type SuperValidated } from 'sveltekit-superforms';
+  import Input from '$lib/components/ui/input.svelte';
+    import Label from '$lib/components/ui/label.svelte';
   import type { FormSchema } from './schema';
   import qs from 'qs';
   import { Button } from '$lib/components/ui/button';
@@ -26,52 +28,52 @@
 
 <form method="POST" use:enhance>
   <div class="flex flex-wrap place-items-center gap-1">
-    <label for="contain">Contiene</label>
-    <input
+    <Label for="contain">Contiene</Label>
+    <Input
       name="contain"
       aria-invalid={$errors.contain ? 'true' : undefined}
       bind:value={$formData.contain}
     />
     {#if $errors.contain}<span class="invalid">{$errors.contain}</span>{/if}
 
-    <label for="notContain">Non contiene</label>
-    <input
+    <Label for="notContain">Non contiene</Label>
+    <Input
       name="notContain"
       aria-invalid={$errors.notContain ? 'true' : undefined}
       bind:value={$formData.notContain}
     />
     {#if $errors.notContain}<span class="invalid">{$errors.notContain}</span>{/if}
 
-    <label for="start">Inizia</label>
-    <input
+    <Label for="start">Inizia</Label>
+    <Input
       name="start"
       aria-invalid={$errors.start ? 'true' : undefined}
       bind:value={$formData.start}
     />
     {#if $errors.start}<span class="invalid">{$errors.start}</span>{/if}
 
-    <label for="notStart">Non inizia</label>
-    <input
+    <Label for="notStart">Non inizia</Label>
+    <Input
       name="notStart"
       aria-invalid={$errors.notStart ? 'true' : undefined}
       bind:value={$formData.notStart}
     />
     {#if $errors.notStart}<span class="invalid">{$errors.notStart}</span>{/if}
 
-    <label for="end">Finisce</label>
-    <input name="end" aria-invalid={$errors.end ? 'true' : undefined} bind:value={$formData.end} />
+    <Label for="end">Finisce</Label>
+    <Input name="end" aria-invalid={$errors.end ? 'true' : undefined} bind:value={$formData.end} />
     {#if $errors.end}<span class="invalid">{$errors.end}</span>{/if}
 
-    <label for="notEnd">Non finisce</label>
-    <input
+    <Label for="notEnd">Non finisce</Label>
+    <Input
       name="notEnd"
       aria-invalid={$errors.notEnd ? 'true' : undefined}
       bind:value={$formData.notEnd}
     />
     {#if $errors.notEnd}<span class="invalid">{$errors.notEnd}</span>{/if}
 
-    <label for="minLength">Lunghezza minima</label>
-    <input
+    <Label for="minLength">Lunghezza minima</Label>
+    <Input
       name="minLength"
       type="number"
       aria-invalid={$errors.minLength ? 'true' : undefined}
@@ -79,8 +81,8 @@
     />
     {#if $errors.minLength}<span class="invalid">{$errors.minLength}</span>{/if}
 
-    <label for="maxLength">Lunghezza massima</label>
-    <input
+    <Label for="maxLength">Lunghezza massima</Label>
+    <Input
       name="maxLength"
       type="number"
       aria-invalid={$errors.maxLength ? 'true' : undefined}
@@ -88,7 +90,7 @@
     />
     {#if $errors.maxLength}<span class="invalid">{$errors.maxLength}</span>{/if}
 
-    <label for="sex">Sesso</label>
+    <Label for="sex">Sesso</Label>
     <select name="sex" bind:value={$formData.sex}>
       <option value={'M'}>M</option>
       <option value={'F'}>F</option>
