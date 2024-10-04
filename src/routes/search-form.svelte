@@ -12,7 +12,7 @@
 
   let { data }: { data: SuperValidated<Infer<FormSchema>> } = $props();
 
-  const form = superForm(data, {
+  const superform = superForm(data, {
     SPA: true,
     validators: zodClient(formSchema),
     async onUpdate({ form, cancel }) {
@@ -22,23 +22,23 @@
     }
   });
 
-  const { form: formData, enhance, validateForm, errors } = form;
+  const { form, enhance, validateForm } = superform;
   validateForm({ update: true });
 </script>
 
 <form method="POST" use:enhance>
   <div class="flex flex-wrap place-items-center gap-1">
-    <FormField name="contain" formData={form} label="Contiene" />
-    <FormField name="notContain" formData={form} label="Non contiene" />
-    <FormField name="start" formData={form} label="Inizia" />
-    <FormField name="notStart" formData={form} label="Non inizia" />
-    <FormField name="end" formData={form} label="Finisce" />
-    <FormField name="notEnd" formData={form} label="Non finisce" />
-    <FormField name="minLength" formData={form} label="Lunghezza minima" type="number" />
-    <FormField name="maxLength" formData={form} label="Lunghezza massima" type="number" />
+    <FormField field="contain" {superform} label="Contiene" />
+    <FormField field="notContain" {superform} label="Non contiene" />
+    <FormField field="start" {superform} label="Inizia" />
+    <FormField field="notStart" {superform} label="Non inizia" />
+    <FormField field="end" {superform} label="Finisce" />
+    <FormField field="notEnd" {superform} label="Non finisce" />
+    <FormField field="minLength" {superform} label="Lunghezza minima" type="number" />
+    <FormField field="maxLength" {superform} label="Lunghezza massima" type="number" />
 
     <Label for="sex">Sesso</Label>
-    <select name="sex" bind:value={$formData.sex}>
+    <select name="sex" bind:value={$form.sex}>
       <option value={'M'}>M</option>
       <option value={'F'}>F</option>
     </select>

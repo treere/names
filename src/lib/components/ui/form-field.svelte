@@ -1,26 +1,30 @@
 <script lang="ts" module>
-  import type { FormPath, SuperForm } from 'sveltekit-superforms';
   type T = Record<string, unknown>;
-  type U = FormPath<T>;
 </script>
 
-<script lang="ts" generics="T extends Record<string, unknown>, U extends FormPath<T>">
+<script lang="ts" generics="T extends Record<string, unknown>">
   import type { HTMLInputAttributes } from 'svelte/elements';
-  import Input from './input.svelte';
-  import Label from './label.svelte';
-  type Props = HTMLInputAttributes & { formData: SuperForm<T>; label: string; name: U };
+  import { formFieldProxy, type SuperForm, type FormPathLeaves } from 'sveltekit-superforms';
 
-  let { formData, name, label, ...rest }: Props = $props();
-  let { form, errors } = formData;
+  let {
+    superform,
+    field,
+    label,
+    ...rest
+  }: { label: string, superform: SuperForm<T>; field: FormPathLeaves<T> } & HTMLInputAttributes = $props();
+
+  const { value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
-<div>
-  <Label for={name}>{label}</Label>
-  <Input
-    {name}
-    aria-invalid={$errors[name] ? 'true' : undefined}
-    bind:value={$form[name]}
+<label>
+  {label}
+  <input
+    name={field}
+    type="text"
+    aria-invalid={$errors ? 'true' : undefined}
+    bind:value={$value}
+    {...$constraints}
     {...rest}
   />
-  {#if $errors[name]}<span class="invalid">{$errors[name]}</span>{/if}
-</div>
+</label>
+{#if $errors}<span class="invalid">{$errors}</span>{/if}
