@@ -5,6 +5,8 @@
 <script lang="ts" generics="T extends Record<string, unknown>">
   import type { HTMLInputAttributes } from 'svelte/elements';
   import { formFieldProxy, type SuperForm, type FormPathLeaves } from 'sveltekit-superforms';
+  import Label from './label.svelte';
+  import Input from './input.svelte';
 
   let {
     superform,
@@ -16,15 +18,17 @@
   const { value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
-<label>
+<Label>
   {label}
-  <input
+  <Input
+    class="mt-2"
     name={field}
     type="text"
     aria-invalid={$errors ? 'true' : undefined}
     bind:value={$value}
     {...$constraints}
     {...rest}
-  />
-</label>
+    />
+</Label>
+
 {#if $errors}<span class="invalid">{$errors}</span>{/if}
