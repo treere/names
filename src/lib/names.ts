@@ -7,7 +7,8 @@ export interface Filters {
   notContain: string;
   notStart: string;
   notEnd: string;
-  sex?: Sex;
+  male: boolean;
+  female: boolean;
   start: string;
   minLength: number;
   maxLength: number;
@@ -26,7 +27,9 @@ const names: Name[] = MALE_NAMES.concat(FEMALE_NAMES);
 export const filteredNamesList = (filters: Filters): Name[] => {
   let n = names;
 
-  if (filters.sex) n = n.filter((name) => name.sex === filters.sex);
+  if (!filters.male) n = n.filter((name) => name.sex !== 'M');
+
+  if (!filters.female) n = n.filter((name) => name.sex !== 'F');
 
   if (filters.minLength > 0) n = n.filter((name) => name.name.length >= filters.minLength);
 

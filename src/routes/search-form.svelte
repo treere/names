@@ -4,8 +4,9 @@
   import { superForm } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
   import { type Infer, type SuperValidated } from 'sveltekit-superforms';
-  import Label from '$lib/components/ui/label.svelte';
+
   import FormField from '$lib/components/ui/form-field.svelte';
+  import FormCheckboxField from '$lib/components/ui/form-checkbox-field.svelte';
   import type { FormSchema } from './schema';
   import qs from 'qs';
   import { Button } from '$lib/components/ui/button';
@@ -37,11 +38,8 @@
     <FormField field="minLength" {superform} label="Lunghezza minima" type="number" />
     <FormField field="maxLength" {superform} label="Lunghezza massima" type="number" />
 
-    <Label for="sex">Sesso</Label>
-    <select name="sex" bind:value={$form.sex}>
-      <option value={'M'}>M</option>
-      <option value={'F'}>F</option>
-    </select>
+    <FormCheckboxField field="male" {superform} label="Maschio" />
+    <FormCheckboxField field="female" {superform} label="Femmina" />
   </div>
   <div class="flex justify-end gap-1">
     <Button type="submit">Cerca</Button>

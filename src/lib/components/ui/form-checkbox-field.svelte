@@ -4,29 +4,39 @@
 
 <script lang="ts" generics="T extends Record<string, unknown>">
   import type { HTMLInputAttributes } from 'svelte/elements';
-  import { formFieldProxy, type SuperForm, type FormPathLeaves } from 'sveltekit-superforms';
+  import {
+    formFieldProxy,
+    type SuperForm,
+    type FormPathLeaves,
+    type FormFieldProxy
+  } from 'sveltekit-superforms';
   import Label from './label.svelte';
-  import Input from './input.svelte';
+  import InputCheckbox from './input-checkbox.svelte';
 
   let {
     superform,
     field,
     label,
     ...rest
-  }: { label: string; superform: SuperForm<T>; field: FormPathLeaves<T> } & HTMLInputAttributes =
-    $props();
+  }: {
+    label: string;
+    superform: SuperForm<T>;
+    field: FormPathLeaves<T, boolean>;
+  } & HTMLInputAttributes = $props();
 
-  const { value, errors, constraints } = formFieldProxy(superform, field);
+  const { value, errors, constraints } = formFieldProxy(
+    superform,
+    field
+  ) satisfies FormFieldProxy<boolean>;
 </script>
 
 <Label>
   {label}
-  <Input
+  <InputCheckbox
     class="mt-2"
     name={field}
-    type="text"
     aria-invalid={$errors ? 'true' : undefined}
-    bind:value={$value}
+    bind:checked={$value}
     {...$constraints}
     {...rest}
   />
