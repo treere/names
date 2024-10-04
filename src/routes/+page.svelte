@@ -7,9 +7,7 @@
   import { formSchema } from './schema';
   import SearchForm from './search-form.svelte';
 
-  const form = $derived.by(async () => {
-    return await superValidate($page.url, zod(formSchema));
-  });
+  const form = $derived(superValidate($page.url, zod(formSchema)));
 
   const namesList = $derived(form.then((f) => filteredNamesList(f.data)));
 </script>
