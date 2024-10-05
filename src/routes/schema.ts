@@ -9,8 +9,8 @@ export const formSchema = z.object({
   start: z.string().toLowerCase().default(""),
   minLength: z.number().nonnegative().default(0),
   maxLength: z.number().nonnegative().default(0),
-  male: z.boolean().default(true),
-  female: z.boolean().default(true)
+  male: z.preprocess((x) => x !== false, z.boolean()),
+  female: z.preprocess((x) => x !== false, z.boolean()),
 });
 
 export type FormSchema = typeof formSchema;

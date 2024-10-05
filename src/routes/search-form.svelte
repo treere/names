@@ -10,7 +10,6 @@
   import type { FormSchema } from './schema';
   import qs from 'qs';
   import { Button } from '$lib/components/ui/button';
-
   let { data }: { data: SuperValidated<Infer<FormSchema>> } = $props();
 
   const superform = superForm(data, {
@@ -23,7 +22,7 @@
     }
   });
 
-  const { form, enhance, validateForm } = superform;
+  const { enhance, validateForm } = superform;
   validateForm({ update: true });
 </script>
 
