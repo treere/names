@@ -10,6 +10,7 @@
   import type { FormSchema } from './schema';
   import qs from 'qs';
   import { Button } from '$lib/components/ui/button';
+  import { base } from '$app/paths';
   let { data }: { data: SuperValidated<Infer<FormSchema>> } = $props();
 
   const superform = superForm(data, {
@@ -17,7 +18,7 @@
     validators: zodClient(formSchema),
     async onUpdate({ form, cancel }) {
       const params = qs.stringify(form.data);
-      goto(`/?${params}`, { keepFocus: true });
+      goto(`${base}/?${params}`, { keepFocus: true });
       cancel();
     }
   });
