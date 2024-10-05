@@ -6,6 +6,6 @@
 </script>
 
 <ModeWatcher />
-<div class="mx-auto max-w-screen-lg">
+<div class="mx-auto max-w-screen-lg px-2">
   {@render children()}
 </div>
