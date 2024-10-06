@@ -33,9 +33,9 @@
   <p>...Caricamento nomi</p>
 {:then namesList}
   <p>Totale nomi filtrati: {namesList.length}</p>
-  <div class="flex flex-wrap gap-1 px-10 py-3">
+  <div class="flex flex-wrap justify-center gap-1 py-3">
     {#each namesList as name}
-      <div>{name.name}</div>
+      <div class="w-32">{name.name}</div>
     {/each}
   </div>
 {:catch error}

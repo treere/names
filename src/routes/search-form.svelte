@@ -42,7 +42,7 @@
     <FormCheckboxField field="male" {superform} label="Maschio" />
     <FormCheckboxField field="female" {superform} label="Femmina" />
   </div>
-  <div class="flex justify-end gap-1">
+  <div class="my-3 flex justify-end gap-1">
     <Button type="submit">Cerca</Button>
 
     <Button onclick={() => goto('/', { keepFocus: true })}>Reset</Button>
