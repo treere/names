@@ -1,18 +1,6 @@
 import FEMALE_NAMES from './femaleNames';
 import MALE_NAMES from './maleNames';
-
-export interface Filters {
-  contain: string;
-  end: string;
-  notContain: string;
-  notStart: string;
-  notEnd: string;
-  male: boolean;
-  female: boolean;
-  start: string;
-  minLength: number;
-  maxLength: number;
-}
+import type { FormType } from './schema';
 
 export interface Name {
   sex: Sex;
@@ -24,7 +12,7 @@ export type Sex = 'M' | 'F';
 
 const names: Name[] = MALE_NAMES.concat(FEMALE_NAMES);
 
-export const filteredNamesList = (filters: Filters): Name[] => {
+export const filteredNamesList = (filters: FormType): Name[] => {
   let n = names;
 
   if (!filters.male) n = n.filter((name) => name.sex !== 'M');

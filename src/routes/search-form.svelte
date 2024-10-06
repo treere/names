@@ -1,16 +1,17 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { formSchema } from './schema';
+
   import { superForm } from 'sveltekit-superforms';
   import { zodClient } from 'sveltekit-superforms/adapters';
   import { type Infer, type SuperValidated } from 'sveltekit-superforms';
 
   import FormField from '$lib/components/ui/form-field.svelte';
   import FormCheckboxField from '$lib/components/ui/form-checkbox-field.svelte';
-  import type { FormSchema } from './schema';
+
   import qs from 'qs';
   import { Button } from '$lib/components/ui/button';
   import { base } from '$app/paths';
+  import { formSchema, type FormSchema } from '$lib/schema';
   let { data }: { data: SuperValidated<Infer<FormSchema>> } = $props();
 
   const superform = superForm(data, {

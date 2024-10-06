@@ -4,8 +4,9 @@
   import { filteredNamesList } from '$lib/names';
   import { superValidate } from 'sveltekit-superforms';
   import { zod } from 'sveltekit-superforms/adapters';
-  import { formSchema } from './schema';
+
   import SearchForm from './search-form.svelte';
+  import { formSchema } from '$lib/schema';
 
   const form = $derived(superValidate($page.url, zod(formSchema)));
 
