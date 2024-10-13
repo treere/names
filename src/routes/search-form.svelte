@@ -45,6 +45,6 @@
   <div class="my-3 flex justify-end gap-1">
     <Button type="submit">Cerca</Button>
 
-    <Button onclick={() => goto('/', { keepFocus: true })}>Reset</Button>
+    <Button onclick={() => goto(`${base}/`, { keepFocus: true })}>Reset</Button>
   </div>
 </form>
