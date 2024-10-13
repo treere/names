@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import LightDark from '$lib/components/LightDark.svelte';
+
   import { filteredNamesList } from '$lib/names';
   import { superValidate } from 'sveltekit-superforms';
   import { zod } from 'sveltekit-superforms/adapters';
@@ -13,11 +13,7 @@
   const namesList = $derived(form.then((f) => filteredNamesList(f.data)));
 </script>
 
-<div class="flex justify-end px-5 py-3">
-  <LightDark />
-</div>
-
-<div class="flex justify-center py-2">
+<div class="mb-5 flex justify-center">
   <h1 class="text-2xl">Trova il nome</h1>
 </div>
 
