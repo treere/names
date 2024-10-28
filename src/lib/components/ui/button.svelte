@@ -11,7 +11,6 @@
   }: ButtonProps = $props();
 </script>
 
-<!-- svelte-ignore a11y_consider_explicit_label -->
 <button type="button" class={cn(buttonVariants({ variant, size, className }))} {...rest}>
   {@render children()}
 </button>
