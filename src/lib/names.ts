@@ -1,6 +1,6 @@
-import FEMALE_NAMES from './femaleNames';
-import MALE_NAMES from './maleNames';
 import type { FormType } from './schema';
+import M_NAMES from './MALE.list';
+import F_NAMES from './FEMALE.list';
 
 export interface Name {
   sex: Sex;
@@ -9,6 +9,18 @@ export interface Name {
 }
 
 export type Sex = 'M' | 'F';
+
+const MALE_NAMES: Name[] = M_NAMES.map((name: string) => ({
+  sex: 'M',
+  name,
+  key: name.toLowerCase()
+}));
+
+const FEMALE_NAMES: Name[] = F_NAMES.map((name: string) => ({
+  sex: 'F',
+  name,
+  key: name.toLowerCase()
+}));
 
 const names: Name[] = MALE_NAMES.concat(FEMALE_NAMES);
 
