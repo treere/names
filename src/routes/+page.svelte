@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import { base } from '$app/paths';
 
   import { filteredNamesList } from '$lib/names';
   import { superValidate } from 'sveltekit-superforms';
@@ -32,7 +33,7 @@
   <div class="flex flex-wrap justify-center gap-1 py-3">
     {#each namesList as name}
       <div class="w-32">
-        <a href={`names/${name.name.toLowerCase()}`}>{name.name}</a>
+        <a href={`${base}/names/${name.name.toLowerCase()}`}>{name.name}</a>
       </div>
     {/each}
   </div>
