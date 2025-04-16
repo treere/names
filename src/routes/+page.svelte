@@ -31,7 +31,9 @@
   <p>Totale nomi filtrati: {namesList.length}</p>
   <div class="flex flex-wrap justify-center gap-1 py-3">
     {#each namesList as name}
-      <div class="w-32">{name.name}</div>
+      <div class="w-32">
+        <a href={`names/${name.name.toLowerCase()}`}>{name.name}</a>
+      </div>
     {/each}
   </div>
 {:catch error}
