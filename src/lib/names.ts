@@ -3,21 +3,21 @@ import M_NAMES from './MALE.list';
 import F_NAMES from './FEMALE.list';
 
 export interface Name {
-  sex: Sex;
+  gender: Gender;
   name: string;
   key: string;
 }
 
-export type Sex = 'M' | 'F';
+export type Gender = 'male' | 'female';
 
 const MALE_NAMES: Name[] = M_NAMES.map((name: string) => ({
-  sex: 'M',
+  gender: 'male',
   name,
   key: name.toLowerCase()
 }));
 
 const FEMALE_NAMES: Name[] = F_NAMES.map((name: string) => ({
-  sex: 'F',
+  gender: 'female',
   name,
   key: name.toLowerCase()
 }));
@@ -27,9 +27,9 @@ const names: Name[] = MALE_NAMES.concat(FEMALE_NAMES);
 export const filteredNamesList = (filters: FormType): Name[] => {
   let n = names;
 
-  if (!filters.male) n = n.filter((name) => name.sex !== 'M');
+  if (!filters.male) n = n.filter((name) => name.gender !== 'male');
 
-  if (!filters.female) n = n.filter((name) => name.sex !== 'F');
+  if (!filters.female) n = n.filter((name) => name.gender !== 'female');
 
   if (filters.minLength > 0) n = n.filter((name) => name.name.length >= filters.minLength);
 

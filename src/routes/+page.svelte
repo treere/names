@@ -33,9 +33,7 @@
   <div class="flex flex-wrap justify-center gap-1 py-3">
     {#each namesList as name}
       <div class="w-32">
-        <a href={`${base}/${name.sex === 'M' ? 'male' : 'female'}/${name.name.toLowerCase()}`}
-          >{name.name}</a
-        >
+        <a href={`${base}/${name.gender}/${name.name.toLowerCase()}`}>{name.name}</a>
       </div>
     {/each}
   </div>
