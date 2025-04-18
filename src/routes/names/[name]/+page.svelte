@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state';
-  const { name } = page.params;
+  
+  const { gender, name } = page.params;
 </script>
 
-<h1 class="text-2xl capitalize">{name}</h1>
+<h1 class="text-2xl capitalize">{name} {gender}</h1>
