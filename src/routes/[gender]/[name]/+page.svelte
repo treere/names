@@ -4,7 +4,13 @@
 
   const { gender, name } = page.params;
 
-  const loadIstatData = async (name: string, gender: string) => {
+  type IstatResponse = {
+    year: number;
+    count: number;
+    percent: number;
+  }[];
+
+  const loadIstatData = async (name: string, gender: string): Promise<IstatResponse> => {
     const lowerName = name.toLowerCase();
     const now = Date.now();
     const genderSymbol = gender === 'male' ? 'm' : 'f';
@@ -13,7 +19,12 @@
       `https://www.istat.it/wp-content/themes/EGPbs5-child/contanomi/nati/index2022.php?callback=callback&type=name&name=${lowerName}&gender=${genderSymbol}&originalName=${lowerName}&_=${now}`,
       { jsonpCallbackFunction: 'callback' }
     );
-    return await response.json();
+    const istatResponse = await response.json();
+
+    return Object.keys(istatResponse)
+      .filter((x) => x !== 'years')
+      .flatMap((x) => istatResponse[x])
+      .map((x) => ({ year: x.year, count: x.count, percent: x.percent }));
   };
 
   const istat = loadIstatData(name, gender);
