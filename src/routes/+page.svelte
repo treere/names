@@ -14,29 +14,43 @@
   const namesList = $derived(form.then((f) => filteredNamesList(f.data)));
 </script>
 
-<div class="mb-5 flex justify-center">
-  <h1 class="text-2xl">Trova il nome</h1>
-</div>
-
-{#await form}
-  <p>...Caricamento filtri</p>
-{:then form}
-  <SearchForm data={form} />
-{:catch error}
-  <p style="color: red">{error.message}</p>
-{/await}
-
-{#await namesList}
-  <p>...Caricamento nomi</p>
-{:then namesList}
-  <p>Totale nomi filtrati: {namesList.length}</p>
-  <div class="flex flex-wrap justify-center gap-1 py-3">
-    {#each namesList as name}
-      <div class="w-32">
-        <a href={`${base}/${name.gender}/${name.name.toLowerCase()}`}>{name.name}</a>
-      </div>
-    {/each}
+<div class="space-y-8">
+  <div class="text-center py-4">
+    <h1 class="text-3xl font-bold tracking-tight">Trova il nome</h1>
+    <p class="text-muted-foreground mt-2">Cerca e filtra i nomi italiani</p>
   </div>
-{:catch error}
-  <p style="color: red">{error.message}</p>
-{/await}
+
+  {#await form}
+    <div class="flex justify-center py-8">
+      <p class="text-muted-foreground">Caricamento filtri...</p>
+    </div>
+  {:then form}
+    <SearchForm data={form} />
+  {:catch error}
+    <p class="text-destructive">{error.message}</p>
+  {/await}
+
+  {#await namesList}
+    <div class="flex justify-center py-8">
+      <p class="text-muted-foreground">Caricamento nomi...</p>
+    </div>
+  {:then namesList}
+    <div class="space-y-4">
+      <div class="flex items-center justify-between text-sm text-muted-foreground">
+        <span>Trovati {namesList.length} nomi</span>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+        {#each namesList as name}
+          <a
+            href={`${base}/${name.gender}/${name.name.toLowerCase()}`}
+            class="flex items-center justify-center px-3 py-2 rounded-lg bg-card border hover:bg-accent hover:border-primary/50 transition-all text-sm font-medium text-center"
+          >
+            {name.name}
+          </a>
+        {/each}
+      </div>
+    </div>
+  {:catch error}
+    <p class="text-destructive">{error.message}</p>
+  {/await}
+</div>

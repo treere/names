@@ -9,14 +9,23 @@
 
 <ModeWatcher />
 
-<div class="mb-5 flex items-center gap-5 border-b px-5 py-3">
-  <a href={`${base}/`}>Home</a>
-  <a href={`${base}/about`}>About</a>
-  <div class="ml-auto">
-    <LightDark />
-  </div>
-</div>
+<div class="min-h-screen bg-background">
+  <header class="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+    <div class="mx-auto max-w-screen-lg px-4 py-3 flex items-center gap-6">
+      <a href={`${base}/`} class="text-xl font-semibold hover:text-primary/80 transition-colors">
+        Trova il nome
+      </a>
+      <nav class="flex items-center gap-4 text-sm">
+        <a href={`${base}/`} class="hover:text-primary transition-colors">Home</a>
+        <a href={`${base}/about`} class="hover:text-primary transition-colors">About</a>
+      </nav>
+      <div class="ml-auto">
+        <LightDark />
+      </div>
+    </div>
+  </header>
 
-<div class="mx-auto max-w-screen-lg px-2">
-  {@render children()}
+  <main class="mx-auto max-w-screen-lg px-4 py-6">
+    {@render children()}
+  </main>
 </div>

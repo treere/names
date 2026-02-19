@@ -28,8 +28,8 @@
   validateForm({ update: true });
 </script>
 
-<form method="POST" use:enhance>
-  <div class="flex flex-wrap place-items-center gap-1">
+<form method="POST" use:enhance class="space-y-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
     <FormField field="contain" {superform} label="Contiene" />
     <FormField field="notContain" {superform} label="Non contiene" />
     <FormField field="start" {superform} label="Inizia" />
@@ -38,13 +38,13 @@
     <FormField field="notEnd" {superform} label="Non finisce" />
     <FormField field="minLength" {superform} label="Lunghezza minima" type="number" />
     <FormField field="maxLength" {superform} label="Lunghezza massima" type="number" />
-
+  </div>
+  <div class="flex flex-wrap items-center gap-4 py-2">
     <FormCheckboxField field="male" {superform} label="Maschio" />
     <FormCheckboxField field="female" {superform} label="Femmina" />
   </div>
-  <div class="my-3 flex justify-end gap-1">
+  <div class="flex justify-end gap-2 pt-2">
     <Button type="submit">Cerca</Button>
-
     <Button onclick={() => goto(`${base}/`, { keepFocus: true })}>Reset</Button>
   </div>
 </form>
