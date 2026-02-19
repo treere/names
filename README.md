@@ -1,38 +1,48 @@
-# create-svelte
+# Names
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+An Italian names lookup and filtering tool built with Svelte 5.
 
-## Creating a project
+## Description
 
-If you're seeing this, you've probably already done this step. Congrats!
+A web application that helps users find and filter Italian names based on various criteria. Users can search by gender, name length, and letter patterns (names containing, starting, or ending with specific letters). Each name displays ISTAT statistics showing the number of births registered in Italy with that name.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Features
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- Filter names by gender (maschile/femminile)
+- Filter by name length
+- Search names containing, starting, or ending with specific letters
+- View ISTAT statistics for each name
+- Dark/light mode support
+
+## Tech Stack
+
+- Svelte 5
+- SvelteKit
+- Tailwind CSS
+- TypeScript
+- Zod (validation)
+- sveltekit-superforms
+
+## Data Source
+
+Name data is sourced from [ISTAT](https://www.istat.it/) - Istituto Nazionale di Statistica.
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
 ```bash
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
 ## Building
-
-To create a production version of your app:
 
 ```bash
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+## Linting and Type Checking
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```bash
+npm run check
+npm run lint
+```
