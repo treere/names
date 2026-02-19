@@ -1,7 +1,8 @@
 <script lang="ts">
   import { page } from '$app/state';
+  import { goto } from '$app/navigation';
   import fetchJsonp from 'fetch-jsonp';
-  import { TrendingUp, TrendingDown, Minus } from 'lucide-svelte';
+  import { TrendingUp, TrendingDown, Minus, ArrowLeft } from 'lucide-svelte';
 
   const { gender, name } = page.params;
 
@@ -47,9 +48,15 @@
 </script>
 
 <div class="space-y-6">
-  <div class="text-center py-4">
-    <h1 class="text-3xl font-bold capitalize tracking-tight">{name}</h1>
-    <p class="text-muted-foreground mt-1 capitalize">{gender === 'male' ? 'Maschio' : 'Femmina'}</p>
+  <div class="py-4 relative">
+    <button onclick={() => history.back()} class="absolute left-0 top-1/2 -translate-y-1/2 flex items-center gap-1 p-2 hover:bg-muted rounded-full">
+      <ArrowLeft class="w-5 h-5" />
+      <span class="text-sm hidden sm:inline">indietro</span>
+    </button>
+    <div class="text-center">
+      <h1 class="text-3xl font-bold capitalize tracking-tight">{name}</h1>
+      <p class="text-muted-foreground mt-1 capitalize">{gender === 'male' ? 'Maschio' : 'Femmina'}</p>
+    </div>
   </div>
 
   {#await istat}
@@ -167,6 +174,6 @@
       </div>
     {/if}
   {:catch error}
-    <p class="text-destructive text-center py-8">Errore nel caricamento dei dati: {error.message}</p>
+    <p class="text-center text-muted-foreground py-8">Probabilmente non ci sono dati nel database ISTAT per questo nome</p>
   {/await}
 </div>
